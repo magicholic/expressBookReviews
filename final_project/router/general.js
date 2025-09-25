@@ -32,8 +32,17 @@ public_users.get('/',function (req, res) {
 
 // Get book details based on ISBN
 public_users.get('/isbn/:isbn',function (req, res) {
-  let isbn = req.params.isbn;
-  res.send(books[isbn]);
+  let bookDetailsPromise = new Promise((resolve, reject) => {
+    let isbn = req.params.isbn;
+    if(books[isbn]) {
+      resolve(books[isbn]);
+    } else {
+      reject({message: "Book not found"});
+    }
+  })
+  bookDetailsPromise.then((books) => {
+    res.send(books);
+  });
  });
   
 // Get book details based on author
