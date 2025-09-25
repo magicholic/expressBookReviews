@@ -28,8 +28,6 @@ public_users.get('/',function (req, res) {
   booksPromise.then((books) => {
     res.send(JSON.stringify(books, null, 4));
   });
-
-  // res.send(JSON.stringify(books, null, 4));
 });
 
 // Get book details based on ISBN
